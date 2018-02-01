@@ -1,5 +1,8 @@
 {
     "$schema": "./node_modules/angular-package-builder/angular-package.schema.json",
     "entryFile": "./index.ts",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "dependencies": {
+        "@angular/material": "angular.material"
+      }
   }

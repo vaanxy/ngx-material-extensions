@@ -1,7 +1,11 @@
 {
   "name": "ngx-material-extensions",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "license": "MIT",
+  "typings": "./ngx-material-extensions.d.ts",
+  "main": "./bundles/ngx-material-extensions.umd.js",
+  "module": "./esm5/ngx-material-extensions.js",
+  "es2015": "./esm2015/ngx-material-extensions.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
