@@ -1,6 +1,6 @@
 {
   "name": "ngx-material-extensions",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "license": "MIT",
   "typings": "./ngx-material-extensions.d.ts",
   "main": "./bundles/ngx-material-extensions.umd.js",

@@ -6,7 +6,7 @@
                [removable]="removable"
                (remove)="remove(index)">
         {{item}}
-        <mat-icon matChipRemove *ngIf="showRemoveIcon">x</mat-icon>
+        <span class="remove-icon" matChipRemove *ngIf="showRemoveIcon">x</span>
       </mat-basic-chip>
       <input style="display:inline" matInput
              placeholder="{{placeholder}}"
