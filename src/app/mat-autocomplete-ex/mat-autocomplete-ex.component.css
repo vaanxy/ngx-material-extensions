@@ -4,12 +4,23 @@
     overflow-x: scroll;
 }
 mat-icon {
-    height: 16px;
-    width: 16px;
-    line-height: 16px;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    line-height: 15px;
     font-size: 12px !important;
     text-align: center;
     color: gray;
+}
+mat-basic-chip {
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 15px;
+
+}
+input {
+    display: inline-block !important;
+    vertical-align: baseline !important;
 }
 mat-icon:hover {
     border-radius: 50%;
