@@ -14,7 +14,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json",
-    "pack": "angular-package-builder"
+    "pack": "angular-package-builder;cp package.json dist/package.json"
   },
   "dependencies": {
     "@angular/animations": "^5.2.0",
