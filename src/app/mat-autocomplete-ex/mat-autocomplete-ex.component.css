@@ -1,0 +1,21 @@
+:host >>> .mat-chip-list-wrapper {
+    width: 100%;
+    display: block;
+    overflow-x: scroll;
+}
+mat-icon {
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    font-size: 12px !important;
+    text-align: center;
+    color: gray;
+}
+mat-icon:hover {
+    border-radius: 50%;
+    background-color: darkgray;
+    color: white;
+}
+:host >>> .mat-chip-list-wrapper::-webkit-scrollbar {
+    display: none;
+}

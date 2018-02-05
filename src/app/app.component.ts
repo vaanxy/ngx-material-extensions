@@ -9,7 +9,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  // 是否显示删除图标
+  showRemoveIcon = true;
   placeholder = '简单数据示例';
   // 原始数据列表, 通常这个列表是从后台获取的
   oriList = [
@@ -30,11 +31,16 @@ export class AppComponent implements OnInit {
   // 这里将列表转换成了一个Observable以模拟从后台获取到的数据
   candidateList$ = of(this.oriList);
 
-  // chips标签里的各个项目
-  items = [];
+
+  complexObject = {
+    attr: {
+      id: '1111',
+      items: [] // chips标签里的各个项目
+    }
+  };
 
   // 是否允许添加多了个chip标签
-  multiple = false;
+  multiple = true;
 
   // 搜索框输入值发生变化时触发的事件，通常用于用户自定义过滤候选列表
   onValueChanged(value: string) {
@@ -43,14 +49,15 @@ export class AppComponent implements OnInit {
 
   // 添加chip标签触发的事件
   onItemAdded(item) {
+    this.candidateList$ = of(this.oriList);
     console.log(item);
-    console.log(this.items);
+    console.log(this.complexObject.attr.items);
   }
 
   // 删除chip标签触发的事件
   onItemRemoved(item) {
     console.log(item);
-    console.log(this.items);
+    console.log(this.complexObject.attr.items);
   }
 
   // 显示值与对象的关系映射函数
@@ -58,6 +65,18 @@ export class AppComponent implements OnInit {
     return item.name;
   }
 
+  onFocused() {
+    // 获得焦点能做的事，暂时没什么可以做的
+  }
+
   constructor() { }
-  ngOnInit() { }
+  ngOnInit() {
+    // 演示赋初始值
+    this.complexObject.attr.items = [
+      {
+        id: 4,
+        name: '张笑死'
+      }
+    ];
+  }
 }

@@ -1,14 +1,14 @@
 
 <mat-form-field style="width:100%">
-  <mat-chip-list #chipList>
-      <mat-chip *ngFor="let item of items; let index = $index"
+  <mat-chip-list #chipList style="display:inline;white-space:nowrap; ">
+      <mat-basic-chip *ngFor="let item of displayValues;let index=index;"
                [selectable]="selectable"
                [removable]="removable"
-               (remove)="remove(index, item)">
+               (remove)="remove(index)">
         {{item}}
-        <span matChipRemove>x</span>
-      </mat-chip>
-      <input matInput
+        <mat-icon matChipRemove *ngIf="showRemoveIcon"><small>x</small></mat-icon>
+      </mat-basic-chip>
+      <input style="display:inline" matInput
              placeholder="{{placeholder}}"
              [matAutocomplete]="auto"
              [matChipInputFor]="chipList"
@@ -16,6 +16,7 @@
              [matChipInputAddOnBlur]="addOnBlur"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="clearInput($event)"
+             (focus)="focus($event)"
              />
 
   </mat-chip-list>

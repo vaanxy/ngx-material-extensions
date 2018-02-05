@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatChipInputEvent, MatAutocompleteSelectedEvent, MatAutocomplete, MatAutocompleteTrigger } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { startWith } from 'rxjs/operators/startWith';
 import { map, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'mat-autocomplete-ex',
@@ -20,15 +21,37 @@ export class MatAutocompleteExComponent implements OnInit {
   selectable = true;
   separatorKeysCodes = [ENTER, COMMA];
   inputCtrl: FormControl;
-
+  displayValues: string[] = [];
+  private _items = [];
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
   @Input() placeholder = '请输入';
   @Input() multiple = false;
-  @Input() items = [];
+  @Input() showRemoveIcon = true;
   @Input() candidateList$: Observable<any[]> = of([]);
+  @Input() set items(items) {
+    this._items = items;
+    this.displayValues = this.items.map(i => this.displayWith(i));
+  }
+  get items() {
+    return this._items;
+  }
+
   @Output() itemAdded: EventEmitter<any> = new EventEmitter();
   @Output() itemRemoved: EventEmitter<any> = new EventEmitter();
   @Output() valueChanged: EventEmitter<string> = new EventEmitter();
-  @Input() displayWith = (item) => item;
+  @Output() focused: EventEmitter<void> = new EventEmitter();
+
+  @Input() set displayWith(func) {
+    this._displayWith = func;
+    this.displayValues = this.items.map(item => this.displayWith(item));
+  }
+  get displayWith() {
+    return this._displayWith;
+  }
+
+
+
+  private _displayWith = (item) => item;
 
 
 
@@ -40,7 +63,10 @@ export class MatAutocompleteExComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  focus() {
+    this.focused.next();
   }
 
   clearInput(event: MatChipInputEvent): void {
@@ -56,14 +82,24 @@ export class MatAutocompleteExComponent implements OnInit {
     }
     const optionValue = event.option.value;
     if (optionValue) {
-      this.items.push(this.displayWith(optionValue));
+      this.items.push(optionValue);
+      this.displayValues = this.items.map(item => this.displayWith(item));
       this.itemAdded.emit(optionValue);
     }
+    console.log(this.autocomplete);
+    setTimeout(() => {
+      if (this.multiple) {
+        this.autocomplete.openPanel();
+      }
+    }, 0);
   }
 
-  remove(index, item): void {
-    this.items.splice(index, 1);
-    this.itemRemoved.emit(item);
+  remove(index): void {
+    console.log(index);
+    const item = this.items.splice(index, 1);
+    this.displayValues = this.items.map(i => this.displayWith(i));
+    this.itemRemoved.emit(item[0]);
   }
+
 
 }

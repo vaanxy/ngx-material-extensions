@@ -1,10 +1,13 @@
 <mat-autocomplete-ex
 (valueChanged)="onValueChanged($event)"
+(focused)="onFocused()"
 [placeholder]="placeholder"
 [candidateList$]="candidateList$"
-[items]="items"
+[items]="complexObject.attr.items"
 [multiple]="multiple"
+[showRemoveIcon]="showRemoveIcon"
 [displayWith]="displayWith"
+
 (itemAdded)="onItemAdded($event)"
 (itemRemoved)="onItemRemoved($event)"
 
