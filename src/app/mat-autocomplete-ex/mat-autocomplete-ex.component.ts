@@ -26,11 +26,10 @@ export class MatAutocompleteExComponent implements OnInit {
 
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
   @Input() set placeholder(placeholder) {
-    setTimeout(() => {
-      this._placeholder = placeholder;
-    }, 0);
+    this._placeholder = placeholder;
   }
   get placeholder() {
+    console.log(this._placeholder);
     return this._placeholder;
   }
 
