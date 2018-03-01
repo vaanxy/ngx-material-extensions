@@ -29,7 +29,7 @@ export class MatAutocompleteExComponent implements OnInit {
     this._placeholder = placeholder;
   }
   get placeholder() {
-    console.log(this._placeholder);
+    // console.log(this._placeholder);
     return this._placeholder;
   }
 

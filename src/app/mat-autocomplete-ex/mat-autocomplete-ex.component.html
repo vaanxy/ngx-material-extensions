@@ -1,5 +1,6 @@
 
 <mat-form-field style="width:100%">
+  <mat-placeholder>{{placeholder}}</mat-placeholder>
   <mat-chip-list #chipList style="display:inline;white-space:nowrap; ">
       <mat-basic-chip *ngFor="let item of displayValues;let index=index;"
                [selectable]="selectable"
@@ -8,8 +9,8 @@
         {{item}}
         <span class="remove-icon" matChipRemove *ngIf="showRemoveIcon">x</span>
       </mat-basic-chip>
+      
       <input style="display:inline" matInput
-             [placeholder]="placeholder"
              [matAutocomplete]="auto"
              [matChipInputFor]="chipList"
              [formControl]="inputCtrl"
