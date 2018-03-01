@@ -14,15 +14,15 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./mat-autocomplete-ex.component.css']
 })
 export class MatAutocompleteExComponent implements OnInit {
-  inputtedItems: string[] = [];
 
+  private _items = [];
   removable = true;
   addOnBlur = true;
   selectable = true;
   separatorKeysCodes = [ENTER, COMMA];
   inputCtrl: FormControl;
   displayValues: string[] = [];
-  private _items = [];
+
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
   @Input() placeholder = '请输入';
   @Input() multiple = false;
@@ -49,13 +49,6 @@ export class MatAutocompleteExComponent implements OnInit {
     return this._displayWith;
   }
 
-
-
-  private _displayWith = (item) => item;
-
-
-
-
   constructor() {
     this.inputCtrl = new FormControl();
     this.inputCtrl.valueChanges.subscribe(value => {
@@ -64,6 +57,8 @@ export class MatAutocompleteExComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  private _displayWith = (item) => item;
 
   focus() {
     this.focused.next();
@@ -100,6 +95,4 @@ export class MatAutocompleteExComponent implements OnInit {
     this.displayValues = this.items.map(i => this.displayWith(i));
     this.itemRemoved.emit(item[0]);
   }
-
-
 }

@@ -9,7 +9,7 @@
         <span class="remove-icon" matChipRemove *ngIf="showRemoveIcon">x</span>
       </mat-basic-chip>
       <input style="display:inline" matInput
-             placeholder="{{placeholder}}"
+             [placeholder]="placeholder"
              [matAutocomplete]="auto"
              [matChipInputFor]="chipList"
              [formControl]="inputCtrl"
