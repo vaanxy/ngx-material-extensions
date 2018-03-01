@@ -68,7 +68,7 @@ export class MatAutocompleteExComponent implements OnInit {
 
   private _displayWith = (item) => item;
 
-  focus() {
+  focus(event) {
     this.focused.next();
   }
 
