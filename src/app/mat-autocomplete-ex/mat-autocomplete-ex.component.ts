@@ -16,6 +16,7 @@ import { map, tap } from 'rxjs/operators';
 export class MatAutocompleteExComponent implements OnInit {
 
   private _items = [];
+  private _placeholder = '请输入';
   removable = true;
   addOnBlur = true;
   selectable = true;
@@ -24,7 +25,15 @@ export class MatAutocompleteExComponent implements OnInit {
   displayValues: string[] = [];
 
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
-  @Input() placeholder = '请输入';
+  @Input() set placeholder(placeholder) {
+    setTimeout(() => {
+      this._placeholder = placeholder;
+    }, 0);
+  }
+  get placeholder() {
+    return this._placeholder;
+  }
+
   @Input() multiple = false;
   @Input() showRemoveIcon = true;
   @Input() candidateList$: Observable<any[]> = of([]);
