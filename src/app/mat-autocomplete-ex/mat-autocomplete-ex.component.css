@@ -1,6 +1,10 @@
 :host >>> .mat-chip-list-wrapper {
-    width: 100%;
-    display: block;
+    /* width: 100%;
+    display: block; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
     overflow-x: scroll;
 }
 span.remove-icon {
@@ -28,7 +32,13 @@ input {
     display: inline-block !important;
     vertical-align: baseline !important;
 }
-
+/* 修复material本身的bug，使其能够与其他mat表单组件对齐 */
+input.mat-chip-input {
+    margin: 0;
+}
 :host >>> .mat-chip-list-wrapper::-webkit-scrollbar {
     display: none;
+}
+mat-basic-chip {
+    outline: none;
 }
