@@ -33,6 +33,8 @@ export class MatAutocompleteExComponent implements OnInit {
     return this._placeholder;
   }
 
+  @Input() autoAppendItem = true;
+  @Input() openPanelAfterRemove = true;
   @Input() multiple = false;
   @Input() showRemoveIcon = true;
   @Input() candidateList$: Observable<any[]> = of([]);
@@ -60,6 +62,9 @@ export class MatAutocompleteExComponent implements OnInit {
   constructor() {
     this.inputCtrl = new FormControl();
     this.inputCtrl.valueChanges.subscribe(value => {
+      if (typeof(value) !== 'string') {
+        return;
+      }
       this.valueChanged.emit(value);
     });
   }
@@ -85,11 +90,13 @@ export class MatAutocompleteExComponent implements OnInit {
     }
     const optionValue = event.option.value;
     if (optionValue) {
-      this.items.push(optionValue);
+      if (this.autoAppendItem) {
+        this.items.push(optionValue);
+      }
       this.displayValues = this.items.map(item => this.displayWith(item));
       this.itemAdded.emit(optionValue);
     }
-    console.log(this.autocomplete);
+
     setTimeout(() => {
       if (this.multiple) {
         this.autocomplete.openPanel();
@@ -102,5 +109,12 @@ export class MatAutocompleteExComponent implements OnInit {
     const item = this.items.splice(index, 1);
     this.displayValues = this.items.map(i => this.displayWith(i));
     this.itemRemoved.emit(item[0]);
+    if (this.openPanelAfterRemove) {
+      setTimeout(() => {
+        if (this.multiple || this.items.length === 0) {
+          this.autocomplete.openPanel();
+        }
+      }, 0);
+    }
   }
 }
