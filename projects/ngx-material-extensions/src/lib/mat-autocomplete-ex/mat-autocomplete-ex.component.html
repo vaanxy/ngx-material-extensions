@@ -4,7 +4,7 @@
       <mat-basic-chip *ngFor="let item of displayValues;let index=index;"
                [selectable]="selectable"
                [removable]="removable"
-               (remove)="remove(index)">
+               (removed)="remove(index)">
         {{item}}
         <span class="remove-icon" matChipRemove *ngIf="showRemoveIcon">x</span>
       </mat-basic-chip>
